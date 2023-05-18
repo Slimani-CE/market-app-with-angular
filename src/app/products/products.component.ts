@@ -14,9 +14,14 @@ export class ProductsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.httpClient.get('http://localhost:8888/INVENTORY-SERVICE/products').subscribe({
-      next: data => this.products = data
-    })
+    this.getProducts();
   }
 
+  private getProducts() {
+    this.httpClient.get('http://localhost:8888/INVENTORY-SERVICE/products')
+      .subscribe({
+      next: data => this.products = data,
+      error: err => console.error('There was an error!', err)
+    })
+  }
 }
